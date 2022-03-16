@@ -41,11 +41,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         // use popup to check and get location
         locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
         if (CLLocationManager.locationServicesEnabled()) {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let dateStr = formatter.string(from: now as Date)
+        self.dayLabel.text = dateStr
     }
 //    override func viewWillAppear(_ animated: Bool) {
 //        setbackgroundLayer()
@@ -69,6 +76,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         AF.request("https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(apiKey)&units=metric").responseJSON { response in
             self.activityIndicator.stopAnimating()
             if let responseStr = response.value {
+    
                 let jsonResponse = JSON(responseStr)
                 let jsonWeather = jsonResponse["weather"].array![0]
                 let jsonTemp = jsonResponse["main"]
@@ -76,11 +84,47 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 
                 self.locationLabel.text = jsonResponse["name"].stringValue
                 self.conditionImageView.image = UIImage(named: iconName)
-                self.conditionLabel.text = jsonWeather["main"].stringValue
+                self.conditionLabel.text = jsonWeather["description"].string
                 self.temperatureLabel.text = "\(Int(round(jsonTemp["temp"].doubleValue))) ℃"
                 
             }
         }
     }
+    private func createLayer() {
+        let layer = CAEmitterLayer()
+        layer.emitterPosition = CGPoint(
+            x: view.center.x,
+            y: -100
+//                view.center.y
+        )
+        
+        let colors: [UIColor] = [
+//            .systemBlue,
+//            .systemYellow,
+//            .systemRed,
+//            .purple,
+//            .systemCyan
+            .white,
+            .systemGray
+        ]
+        
+        let cells: [CAEmitterCell] = colors.compactMap {
+            let cell = CAEmitterCell()
+            cell.scale = 0.01
+            cell.emissionRange = .pi * 2
+            cell.lifetime = 60
+            cell.birthRate = 150
+            cell.velocity = 60
+            cell.color = $0.cgColor
+            cell.contents = UIImage(named: "white")!.cgImage
+            
+            return cell
+        }
+        
+        
+        layer.emitterCells = cells
+        view.layer.addSublayer(layer)
+    }
+    
 }
 
