@@ -50,9 +50,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         let now = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        formatter.dateFormat = "yyyy/MM/dd   HH:mm"
         let dateStr = formatter.string(from: now as Date)
         self.dayLabel.text = dateStr
+        
+        
     }
 //    override func viewWillAppear(_ animated: Bool) {
 //        setbackgroundLayer()
