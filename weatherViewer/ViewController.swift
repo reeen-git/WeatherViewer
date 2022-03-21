@@ -56,7 +56,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let dateStr = formatter.string(from: now as Date)
         self.dayLabel.text = dateStr
         
-        
     }
    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

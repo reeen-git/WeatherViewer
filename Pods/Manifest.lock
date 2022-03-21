@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.5.0)
+  - CLTypingLabel (0.4.0)
   - NVActivityIndicatorView (5.1.1):
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
@@ -7,20 +8,23 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - CLTypingLabel
   - NVActivityIndicatorView
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CLTypingLabel
     - NVActivityIndicatorView
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  CLTypingLabel: 95a7d1faf7e3d1d952cd11cb0491d17d80c50934
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 539b7019d4f2147eafa3968aefc5bbdcde7c263f
+PODFILE CHECKSUM: a083574f7bfa54c9c2ef164ff4ea84d727cda13b
 
 COCOAPODS: 1.11.2

@@ -11,8 +11,8 @@
 		4B0581AB27DC398F00D384F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0581AA27DC398F00D384F6 /* SceneDelegate.swift */; };
 		4B0581AD27DC398F00D384F6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B0581AC27DC398F00D384F6 /* ViewController.swift */; };
 		4B0581B227DC399000D384F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B0581B127DC399000D384F6 /* Assets.xcassets */; };
-		4B0581B527DC399000D384F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B0581B327DC399000D384F6 /* LaunchScreen.storyboard */; };
-		4B0581BE27DC3A4500D384F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B0581BC27DC3A4500D384F6 /* Main.storyboard */; };
+		4B5F19F227E8A946003DC9CD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B5F19F127E8A946003DC9CD /* LaunchScreen.storyboard */; };
+		4BC5F1B427E4B781005F9331 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BC5F1B227E4B781005F9331 /* Main.storyboard */; };
 		A7116C23D56F3B3EA1E00520 /* Pods_weatherViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E5DE12A410331D133D5EB0D /* Pods_weatherViewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,9 +24,9 @@
 		4B0581AA27DC398F00D384F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4B0581AC27DC398F00D384F6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4B0581B127DC399000D384F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4B0581B427DC399000D384F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4B0581B627DC399000D384F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4B0581BD27DC3A4500D384F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ../../swift_weatherApp/MyWeatherApp/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4B5F19F127E8A946003DC9CD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		4BC5F1B327E4B781005F9331 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/swift_weatherApp/MyWeatherApp/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		C14297BED01DA950E0DED415 /* Pods-weatherViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weatherViewer.debug.xcconfig"; path = "Target Support Files/Pods-weatherViewer/Pods-weatherViewer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,9 +66,9 @@
 				4B0581A827DC398F00D384F6 /* AppDelegate.swift */,
 				4B0581AA27DC398F00D384F6 /* SceneDelegate.swift */,
 				4B0581AC27DC398F00D384F6 /* ViewController.swift */,
-				4B0581BC27DC3A4500D384F6 /* Main.storyboard */,
+				4BC5F1B227E4B781005F9331 /* Main.storyboard */,
+				4B5F19F127E8A946003DC9CD /* LaunchScreen.storyboard */,
 				4B0581B127DC399000D384F6 /* Assets.xcassets */,
-				4B0581B327DC399000D384F6 /* LaunchScreen.storyboard */,
 				4B0581B627DC399000D384F6 /* Info.plist */,
 			);
 			path = weatherViewer;
@@ -151,9 +151,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B0581B527DC399000D384F6 /* LaunchScreen.storyboard in Resources */,
 				4B0581B227DC399000D384F6 /* Assets.xcassets in Resources */,
-				4B0581BE27DC3A4500D384F6 /* Main.storyboard in Resources */,
+				4B5F19F227E8A946003DC9CD /* LaunchScreen.storyboard in Resources */,
+				4BC5F1B427E4B781005F9331 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,18 +215,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4B0581B327DC399000D384F6 /* LaunchScreen.storyboard */ = {
+		4BC5F1B227E4B781005F9331 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4B0581B427DC399000D384F6 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		4B0581BC27DC3A4500D384F6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4B0581BD27DC3A4500D384F6 /* Base */,
+				4BC5F1B327E4B781005F9331 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

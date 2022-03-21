@@ -6,8 +6,8 @@ target 'weatherViewer' do
   use_frameworks!
 
   # Pods for weatherViewer
- pod 'Alamofire'
+  pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'NVActivityIndicatorView'
-
+  pod 'CLTypingLabel' 
 end
