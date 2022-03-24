@@ -25,6 +25,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var activityIndicator: NVActivityIndicatorView!
     // user location
     let locationManager = CLLocationManager()
+    let gradient = CAGradientLayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +39,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             frame: indicatorFrame,
             type: .lineScale, color: UIColor.white,
             padding: 20.0)
+        
         activityIndicator.backgroundColor = UIColor.black
         view.addSubview(activityIndicator)
-        view.backgroundColor = UIColor(#colorLiteral(red: 0.2685144057, green: 0.4098663574, blue: 0.5113705851, alpha: 1))
-        
+                
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         if (CLLocationManager.locationServicesEnabled()) {
@@ -49,7 +50,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
-        
         let now = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd  HH:mm"
@@ -57,7 +57,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         self.dayLabel.text = dateStr
         
     }
-   
+    func dayColorGradient() {
+        gradient.frame = view.bounds
+        // グラデーション開始色
+        let topColor = UIColor(#colorLiteral(red: 0.05936148018, green: 0.5335171223, blue: 0.9719132781, alpha: 1)).cgColor
+        // グラデーション終了色
+        let bottopColor = UIColor(#colorLiteral(red: 0.831840694, green: 0.9067348838, blue: 1, alpha: 1)).cgColor
+        let gradientColors: [CGColor] = [topColor, bottopColor]
+        gradient.colors = gradientColors
+        // ビューにグラデーションレイヤーを追加
+        self.view.layer.insertSublayer(gradient,at:0)
+    }
+    func nightColorGradient() {
+        gradient.frame = view.bounds
+        // グラデーション開始色
+        let topColor = UIColor(#colorLiteral(red: 0.03905873373, green: 0.1720667481, blue: 0.3135736883, alpha: 1)).cgColor
+        // グラデーション終了色
+        let bottopColor = UIColor(#colorLiteral(red: 0.6376335025, green: 0.5615429282, blue: 0.02414633147, alpha: 1)).cgColor
+        let gradientColors: [CGColor] = [topColor, bottopColor]
+        gradient.colors = gradientColors
+        // ビューにグラデーションレイヤーを追加
+        self.view.layer.insertSublayer(gradient,at:0)
+    }
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
         print(location)
@@ -72,61 +95,89 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 let jsonWeather = jsonResponse["weather"].array![0]
                 let jsonTemp = jsonResponse["main"]
                 let iconName = jsonWeather["icon"].stringValue
+                
                 switch iconName {
                 case "01d":
                     self.conditionImageView.image = UIImage(systemName: "sun.max")
+                    self.dayColorGradient()
                 case "01n":
                     self.conditionImageView.image = UIImage(systemName: "moon")
+                    self.nightColorGradient()
                 case "02d":
                     self.conditionImageView.image = UIImage(systemName: "cloud.sun")
+                    self.dayColorGradient()
                 case "02n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.moon")
+                    self.nightColorGradient()
                 case "03d":
                     self.conditionImageView.image = UIImage(systemName: "cloud")
+                    self.dayColorGradient()
                 case "03n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.fill")
+                    self.nightColorGradient()
                 case "04d":
                     self.conditionImageView.image = UIImage(systemName: "smoke")
+                    self.dayColorGradient()
                 case "04n":
                     self.conditionImageView.image = UIImage(systemName: "smoke.fill")
+                    self.nightColorGradient()
                 case "05d":
                     self.conditionImageView.image = UIImage(systemName: "smoke")
+                    self.dayColorGradient()
                 case "05n":
                     self.conditionImageView.image = UIImage(systemName: "smoke.fill")
+                    self.nightColorGradient()
                 case "06d":
                     self.conditionImageView.image = UIImage(systemName: "smoke")
+                    self.dayColorGradient()
                 case "06n":
                     self.conditionImageView.image = UIImage(systemName: "smoke.fill")
+                    self.nightColorGradient()
                 case "07d":
                     self.conditionImageView.image = UIImage(systemName: "smoke")
+                    self.dayColorGradient()
                 case "07n":
                     self.conditionImageView.image = UIImage(systemName: "smoke.fill")
+                    self.nightColorGradient()
                 case "08d":
                     self.conditionImageView.image = UIImage(systemName: "smoke")
+                    self.dayColorGradient()
                 case "08n":
                     self.conditionImageView.image = UIImage(systemName: "smoke.fill")
+                    self.nightColorGradient()
                 case "09d":
                     self.conditionImageView.image = UIImage(systemName: "cloud.rain")
+                    self.dayColorGradient()
                 case "09n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.rain.fill")
+                    self.nightColorGradient()
                 case "10d":
                     self.conditionImageView.image = UIImage(systemName: "cloud.sun.rain")
+                    self.dayColorGradient()
                 case "10n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.moon.rain")
+                    self.nightColorGradient()
                 case "11d":
                     self.conditionImageView.image = UIImage(systemName: "cloud.bolt.rain")
+                    self.dayColorGradient()
                 case "11n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.moon.rain")
+                    self.nightColorGradient()
                 case "13d":
                     self.conditionImageView.image = UIImage(systemName: "snowflake")
+                    self.dayColorGradient()
                 case "13n":
                     self.conditionImageView.image = UIImage(systemName: "snowflake")
+                    self.nightColorGradient()
                 case "50d":
                     self.conditionImageView.image = UIImage(systemName: "tornado")
+                    self.dayColorGradient()
                 case "50n":
                     self.conditionImageView.image = UIImage(systemName: "tornado")
+                    self.nightColorGradient()
                 default:
                     self.conditionImageView.image = UIImage(systemName: "exclamationmark.circle")
+                    self.view.backgroundColor = .blue
                 }
                 self.conditionImageView.tintColor = .white
                 self.locationLabel.text = jsonResponse["name"].stringValue
