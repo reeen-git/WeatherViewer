@@ -99,89 +99,92 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 switch iconName {
                 case "01d":
                     self.conditionImageView.image = UIImage(systemName: "sun.max")
+                    self.conditionLabel.text = "快晴"
                     self.dayColorGradient()
                 case "01n":
                     self.conditionImageView.image = UIImage(systemName: "moon")
+                    self.conditionLabel.text = "快晴"
                     self.nightColorGradient()
                 case "02d":
                     self.conditionImageView.image = UIImage(systemName: "cloud.sun")
+                    self.conditionLabel.text = "晴れ / (0-24%)"
                     self.dayColorGradient()
                 case "02n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.moon")
+                    self.conditionLabel.text = "晴れ / (0-24%)"
                     self.nightColorGradient()
                 case "03d":
                     self.conditionImageView.image = UIImage(systemName: "cloud")
+                    self.conditionLabel.text = "薄曇り / (25-50%)"
                     self.dayColorGradient()
                 case "03n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.fill")
+                    self.conditionLabel.text = "薄曇り / (25-50%)"
                     self.nightColorGradient()
                 case "04d":
                     self.conditionImageView.image = UIImage(systemName: "smoke")
+                    self.conditionLabel.text = "曇り / (51-84%)"
                     self.dayColorGradient()
                 case "04n":
                     self.conditionImageView.image = UIImage(systemName: "smoke.fill")
+                    self.conditionLabel.text = "曇り / (51-84%)"
                     self.nightColorGradient()
                 case "05d":
                     self.conditionImageView.image = UIImage(systemName: "smoke")
+                    self.conditionLabel.text = "曇り / (85-100%)"
                     self.dayColorGradient()
                 case "05n":
                     self.conditionImageView.image = UIImage(systemName: "smoke.fill")
-                    self.nightColorGradient()
-                case "06d":
-                    self.conditionImageView.image = UIImage(systemName: "smoke")
-                    self.dayColorGradient()
-                case "06n":
-                    self.conditionImageView.image = UIImage(systemName: "smoke.fill")
-                    self.nightColorGradient()
-                case "07d":
-                    self.conditionImageView.image = UIImage(systemName: "smoke")
-                    self.dayColorGradient()
-                case "07n":
-                    self.conditionImageView.image = UIImage(systemName: "smoke.fill")
-                    self.nightColorGradient()
-                case "08d":
-                    self.conditionImageView.image = UIImage(systemName: "smoke")
-                    self.dayColorGradient()
-                case "08n":
-                    self.conditionImageView.image = UIImage(systemName: "smoke.fill")
+                    self.conditionLabel.text = "曇り / (85-100%)"
                     self.nightColorGradient()
                 case "09d":
                     self.conditionImageView.image = UIImage(systemName: "cloud.rain")
+                    self.conditionLabel.text = "雨"
                     self.dayColorGradient()
                 case "09n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.rain.fill")
+                    self.conditionLabel.text = "雨"
                     self.nightColorGradient()
                 case "10d":
                     self.conditionImageView.image = UIImage(systemName: "cloud.sun.rain")
+                    self.conditionLabel.text = "天気雨"
                     self.dayColorGradient()
                 case "10n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.moon.rain")
+                    self.conditionLabel.text = "天気雨"
                     self.nightColorGradient()
                 case "11d":
                     self.conditionImageView.image = UIImage(systemName: "cloud.bolt.rain")
+                    self.conditionLabel.text = "雷雨"
                     self.dayColorGradient()
                 case "11n":
                     self.conditionImageView.image = UIImage(systemName: "cloud.moon.rain")
+                    self.conditionLabel.text = "雷雨"
                     self.nightColorGradient()
                 case "13d":
                     self.conditionImageView.image = UIImage(systemName: "snowflake")
+                    self.conditionLabel.text = "雪"
                     self.dayColorGradient()
                 case "13n":
                     self.conditionImageView.image = UIImage(systemName: "snowflake")
+                    self.conditionLabel.text = "雪"
                     self.nightColorGradient()
                 case "50d":
                     self.conditionImageView.image = UIImage(systemName: "tornado")
+                    self.conditionLabel.text = "嵐"
                     self.dayColorGradient()
                 case "50n":
                     self.conditionImageView.image = UIImage(systemName: "tornado")
+                    self.conditionLabel.text = "嵐"
                     self.nightColorGradient()
                 default:
                     self.conditionImageView.image = UIImage(systemName: "exclamationmark.circle")
+                    self.conditionLabel.text = "その他(天気に警戒してください。）"
                     self.view.backgroundColor = .blue
                 }
                 self.conditionImageView.tintColor = .white
                 self.locationLabel.text = jsonResponse["name"].stringValue
-                self.conditionLabel.text = jsonWeather["description"].string
+//                self.conditionLabel.text = jsonWeather["description"].string
                 self.temperatureLabel.text = "\(Int(round(jsonTemp["temp"].doubleValue))) ℃"
                 
             }
