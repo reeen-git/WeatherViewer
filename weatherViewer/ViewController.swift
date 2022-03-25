@@ -71,10 +71,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func nightColorGradient() {
         gradient.frame = view.bounds
         // グラデーション開始色
-        let topColor = UIColor(#colorLiteral(red: 0.03905873373, green: 0.1720667481, blue: 0.3135736883, alpha: 1)).cgColor
+        let topColor = UIColor(#colorLiteral(red: 0.0010493031, green: 0.003747344716, blue: 0.005034115165, alpha: 1)).cgColor
         // グラデーション終了色
-        let bottopColor = UIColor(#colorLiteral(red: 0.6376335025, green: 0.5615429282, blue: 0.02414633147, alpha: 1)).cgColor
-        let gradientColors: [CGColor] = [topColor, bottopColor]
+        let bottopColor = UIColor(#colorLiteral(red: 0.2685144057, green: 0.4098663574, blue: 0.5113705851, alpha: 1)).cgColor
+        let bottopColor2 = UIColor(#colorLiteral(red: 0.5788831711, green: 0.6272250414, blue: 0.6329120398, alpha: 1)).cgColor
+
+        let gradientColors: [CGColor] = [topColor, bottopColor, bottopColor2]
         gradient.colors = gradientColors
         // ビューにグラデーションレイヤーを追加
         self.view.layer.insertSublayer(gradient,at:0)
