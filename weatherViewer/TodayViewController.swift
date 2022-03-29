@@ -10,7 +10,7 @@ import SwiftyJSON
 import NVActivityIndicatorView
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class TodayViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
@@ -71,10 +71,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func nightColorGradient() {
         gradient.frame = view.bounds
         // グラデーション開始色
-        let topColor = UIColor(#colorLiteral(red: 0.0010493031, green: 0.003747344716, blue: 0.005034115165, alpha: 1)).cgColor
+        let topColor = UIColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)).cgColor
         // グラデーション終了色
-        let bottopColor = UIColor(#colorLiteral(red: 0.2685144057, green: 0.4098663574, blue: 0.5113705851, alpha: 1)).cgColor
-        let bottopColor2 = UIColor(#colorLiteral(red: 0.5788831711, green: 0.6272250414, blue: 0.6329120398, alpha: 1)).cgColor
+        let bottopColor = UIColor(#colorLiteral(red: 0.2263697088, green: 0.3509760201, blue: 0.4403417706, alpha: 1)).cgColor
+        let bottopColor2 = UIColor(#colorLiteral(red: 0.8932324052, green: 0.898203671, blue: 0.8938085437, alpha: 1)).cgColor
 
         let gradientColors: [CGColor] = [topColor, bottopColor, bottopColor2]
         gradient.colors = gradientColors
