@@ -4,6 +4,7 @@
 //
 //  Created by 高橋蓮 on 2022/03/12.
 //
+
 import UIKit
 import Alamofire
 import SwiftyJSON
@@ -11,7 +12,7 @@ import CoreLocation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
 
-    //SettingViews
+    //MARK: -Setting Views
     let dateLabel: UILabel = {
         let now = Date()
         let formatter = DateFormatter()
@@ -52,12 +53,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    let locationText: UILabel = {
+        let label = UILabel.init()
+        label.text = "現在地："
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     // user location
     let locationManager = CLLocationManager()
     let gradient = CAGradientLayer()
     var lat = 26.8205
     var lon = 30.8024
-
+    
+//MARK: -ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.requestWhenInUseAuthorization()
@@ -72,24 +81,28 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             view.addSubview(conditionLabel)
             view.addSubview(temperatureLabel)
             view.addSubview(locationLabel)
-            dateLabel.font = UIFont.boldSystemFont(ofSize: 23.0)
-            conditionLabel.font = UIFont.boldSystemFont(ofSize: 23.0)
-            temperatureLabel.font = UIFont.boldSystemFont(ofSize: 23.0)
-            locationLabel.font = UIFont.boldSystemFont(ofSize: 23.0)
+            view.addSubview(locationText)
+            dateLabel.font = UIFont.boldSystemFont(ofSize: 28.0)
+            conditionLabel.font = UIFont.boldSystemFont(ofSize: 28.0)
+            temperatureLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
+            locationLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
+            locationText.font = UIFont.boldSystemFont(ofSize: 30.0)
            
             NSLayoutConstraint.activate([
-                conditionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 300),
+                conditionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 330),
                 conditionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
                 dateLabel.topAnchor.constraint(equalTo: conditionLabel.bottomAnchor, constant: 30),
                 dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
                 temperatureLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 30),
                 temperatureLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
                 locationLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 30),
-                locationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25)
+                locationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 140),
+                locationText.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 30),
+                locationText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25)
             ])
         }
     }
-    
+    //MARK: -Setting GragientColors
     func dayColorGradient() {
         gradient.frame = view.bounds
         // グラデーション開始色
@@ -115,7 +128,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // ビューにグラデーションレイヤーを追加
         self.view.layer.insertSublayer(gradient,at:0)
     }
-
+//MARK: -Get info & set value
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
         print(location)
@@ -133,92 +146,91 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 switch iconName {
                 case "01d":
                     self.imageView.image = UIImage(systemName: "sun.max")
-                    self.conditionLabel.text = "Condition: 快晴"
+                    self.conditionLabel.text = "天気: 快晴"
                     self.dayColorGradient()
                 case "01n":
                     self.imageView.image = UIImage(systemName: "moon")
-                    self.conditionLabel.text = "Condition: 快晴"
+                    self.conditionLabel.text = "天気: 快晴"
                     self.nightColorGradient()
                 case "02d":
                     self.imageView.image = UIImage(systemName: "cloud.sun")
-                    self.conditionLabel.text = "Condition: 晴れ / (0-24%)"
+                    self.conditionLabel.text = "天気: 晴れ / (0-24%)"
                     self.dayColorGradient()
                 case "02n":
                     self.imageView.image = UIImage(systemName: "cloud.moon")
-                    self.conditionLabel.text = "Condition: 晴れ / (0-24%)"
+                    self.conditionLabel.text = "天気: 晴れ / (0-24%)"
                     self.nightColorGradient()
                 case "03d":
                     self.imageView.image = UIImage(systemName: "cloud")
-                    self.conditionLabel.text = "Condition: 薄曇り / (25-50%)"
+                    self.conditionLabel.text = "天気: 薄曇り / (25-50%)"
                     self.dayColorGradient()
                 case "03n":
                     self.imageView.image = UIImage(systemName: "cloud.fill")
-                    self.conditionLabel.text = "Condition: 薄曇り / (25-50%)"
+                    self.conditionLabel.text = "天気: 薄曇り / (25-50%)"
                     self.nightColorGradient()
                 case "04d":
                     self.imageView.image = UIImage(systemName: "smoke")
-                    self.conditionLabel.text = "Condition: 曇り / (51-84%)"
+                    self.conditionLabel.text = "天気: 曇り / (51-84%)"
                     self.dayColorGradient()
                 case "04n":
                     self.imageView.image = UIImage(systemName: "smoke.fill")
-                    self.conditionLabel.text = "Condition: 曇り / (51-84%)"
+                    self.conditionLabel.text = "天気: 曇り / (51-84%)"
                     self.nightColorGradient()
                 case "05d":
                     self.imageView.image = UIImage(systemName: "smoke")
-                    self.conditionLabel.text = "Condition: 曇り / (85-100%)"
+                    self.conditionLabel.text = "天気: 曇り / (85-100%)"
                     self.dayColorGradient()
                 case "05n":
                     self.imageView.image = UIImage(systemName: "smoke.fill")
-                    self.conditionLabel.text = "Condition: 曇り / (85-100%)"
+                    self.conditionLabel.text = "天気: 曇り / (85-100%)"
                     self.nightColorGradient()
                 case "09d":
                     self.imageView.image = UIImage(systemName: "cloud.rain")
-                    self.conditionLabel.text = "Condition: 雨"
+                    self.conditionLabel.text = "天気: 雨"
                     self.dayColorGradient()
                 case "09n":
                     self.imageView.image = UIImage(systemName: "cloud.rain.fill")
-                    self.conditionLabel.text = "Condition: 雨"
+                    self.conditionLabel.text = "天気: 雨"
                     self.nightColorGradient()
                 case "10d":
                     self.imageView.image = UIImage(systemName: "cloud.sun.rain")
-                    self.conditionLabel.text = "Condition: 天気雨"
+                    self.conditionLabel.text = "天気: 天気雨"
                     self.dayColorGradient()
                 case "10n":
                     self.imageView.image = UIImage(systemName: "cloud.moon.rain")
-                    self.conditionLabel.text = "Condition: 天気雨"
+                    self.conditionLabel.text = "天気: 天気雨"
                     self.nightColorGradient()
                 case "11d":
                     self.imageView.image = UIImage(systemName: "cloud.bolt.rain")
-                    self.conditionLabel.text = "Condition: 雷雨"
+                    self.conditionLabel.text = "天気: 雷雨"
                     self.dayColorGradient()
                 case "11n":
                     self.imageView.image = UIImage(systemName: "cloud.moon.rain")
-                    self.conditionLabel.text = "Condition: 雷雨"
+                    self.conditionLabel.text = "天気: 雷雨"
                     self.nightColorGradient()
                 case "13d":
                     self.imageView.image = UIImage(systemName: "snowflake")
-                    self.conditionLabel.text = "Condition: 雪"
+                    self.conditionLabel.text = "天気: 雪"
                     self.dayColorGradient()
                 case "13n":
                     self.imageView.image = UIImage(systemName: "snowflake")
-                    self.conditionLabel.text = "Condition: 雪"
+                    self.conditionLabel.text = "天気: 雪"
                     self.nightColorGradient()
                 case "50d":
                     self.imageView.image = UIImage(systemName: "tornado")
-                    self.conditionLabel.text = "Condition: 嵐"
+                    self.conditionLabel.text = "天気: 嵐"
                     self.dayColorGradient()
                 case "50n":
                     self.imageView.image = UIImage(systemName: "tornado")
-                    self.conditionLabel.text = "Condition: 嵐"
+                    self.conditionLabel.text = "天気: 嵐"
                     self.nightColorGradient()
                 default:
                     self.imageView.image = UIImage(systemName: "exclamationmark.circle")
-                    self.conditionLabel.text = "Condition: その他(天気に警戒してください。）"
+                    self.conditionLabel.text = "天気: その他(天気に警戒してください。）"
                     self.view.backgroundColor = .blue
                 }
                 self.locationLabel.text = jsonResponse["name"].stringValue
-                //self.conditionLabel.text = jsonWeather["description"].string
-                self.temperatureLabel.text = "\(Int(round(jsonTemp["temp"].doubleValue))) ℃"
+                self.temperatureLabel.text = "温度: \(Int(round(jsonTemp["temp"].doubleValue))) ℃"
             }
         }
     }
