@@ -120,13 +120,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // グラデーション開始色
         let topColor = UIColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)).cgColor
         // グラデーション終了色
-        let bottopColor = UIColor(#colorLiteral(red: 0.2263697088, green: 0.3509760201, blue: 0.4403417706, alpha: 1)).cgColor
-        let bottopColor2 = UIColor(#colorLiteral(red: 0.8932324052, green: 0.898203671, blue: 0.8938085437, alpha: 1)).cgColor
+        let bottopColor = UIColor(#colorLiteral(red: 0.4114098549, green: 0.4468902946, blue: 0.4945960641, alpha: 1)).cgColor
 
-        let gradientColors: [CGColor] = [topColor, bottopColor, bottopColor2]
+        let gradientColors: [CGColor] = [topColor, bottopColor]
         gradient.colors = gradientColors
         // ビューにグラデーションレイヤーを追加
         self.view.layer.insertSublayer(gradient,at:0)
+        
+        dateLabel.textColor = .systemGray6
+        locationText.textColor = .systemGray6
+        locationLabel.textColor = .systemGray6
+        temperatureLabel.textColor = .systemGray6
+        conditionLabel.textColor = .systemGray6
     }
 //MARK: -Get info & set value
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
