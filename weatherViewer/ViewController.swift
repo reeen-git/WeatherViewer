@@ -135,10 +135,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         lat = location.coordinate.latitude
         lon = location.coordinate.longitude
 
-        AF.request("https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=e314c7e4533ae54e9740790e14b56ac3&units=metric").responseJSON { response in
+        
+        AF.request("https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=e314c7e4533ae54e9740790e14b56ac3&units=metric").response { response in
             if let responseStr = response.value {
 
-                let jsonResponse = JSON(responseStr)
+                let jsonResponse = JSON(responseStr!)
                 let jsonWeather = jsonResponse["weather"].array![0]
                 let jsonTemp = jsonResponse["main"]
                 let iconName = jsonWeather["icon"].stringValue
