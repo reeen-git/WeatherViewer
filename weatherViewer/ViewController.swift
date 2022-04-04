@@ -137,6 +137,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationLabel.textColor = .systemGray6
         temperatureLabel.textColor = .systemGray6
         conditionLabel.textColor = .systemGray6
+        humidityLabel.textColor = .systemGray6
+        windSpeedLabel.textColor = .systemGray6
     }
     
 //MARK: -Get info & set value
