@@ -20,7 +20,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let dateStr = formatter.string(from: now as Date)
         
         let view = UILabel.init()
-        view.text = "Date: \(dateStr)"
+        view.text = "Date:  \(dateStr)"
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -30,13 +30,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         imageView.contentMode = UIView.ContentMode.scaleAspectFill
         imageView.tintColor = .white
         return imageView
-    }()
-    
-    let descriptionLabel: UILabel = {
-        let label = UILabel.init()
-        label.text = "天気:"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }()
 
     let conditionLabel: UILabel = {
@@ -53,16 +46,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         return label
     }()
     
-    let locationLabel: UILabel = {
+    let windSpeedLabel: UILabel = {
         let label = UILabel.init()
         label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let locationText: UILabel = {
+    let humidityLabel: UILabel = {
         let label = UILabel.init()
-        label.text = "現在地:"
+        label.text = ""
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let locationLabel: UILabel = {
+        let label = UILabel.init()
+        label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -86,30 +86,31 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             view.addSubview(dateLabel)
             view.addSubview(imageView)
             view.addSubview(conditionLabel)
-            view.addSubview(descriptionLabel)
             view.addSubview(temperatureLabel)
             view.addSubview(locationLabel)
-            view.addSubview(locationText)
-            dateLabel.font = UIFont.boldSystemFont(ofSize: 28.0)
-            descriptionLabel.font = UIFont.boldSystemFont(ofSize: 28.0)
-            conditionLabel.font = UIFont.boldSystemFont(ofSize: 28.0)
-            temperatureLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
-            locationLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
-            locationText.font = UIFont.boldSystemFont(ofSize: 30.0)
-           
+            view.addSubview(windSpeedLabel)
+            view.addSubview(humidityLabel)
+            
+            dateLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 28.0, weight: .medium)
+            conditionLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 28.0, weight: .medium)
+            temperatureLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 28.0, weight: .medium)
+            locationLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 28.0, weight: .medium)
+            windSpeedLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 28.0, weight: .medium)
+            humidityLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 28.0, weight: .medium)
+
             NSLayoutConstraint.activate([
                 conditionLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 80),
-                conditionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 110),
-                descriptionLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 80),
-                descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-                dateLabel.topAnchor.constraint(equalTo: conditionLabel.bottomAnchor, constant: 30),
-                dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-                temperatureLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 30),
-                temperatureLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-                locationLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 30),
-                locationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 140),
-                locationText.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 30),
-                locationText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40)
+                conditionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+                dateLabel.topAnchor.constraint(equalTo: conditionLabel.bottomAnchor, constant: 40),
+                dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+                temperatureLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 40),
+                temperatureLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+                humidityLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 40),
+                humidityLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+                locationLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 40),
+                locationLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+                windSpeedLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 40),
+                windSpeedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
             ])
         }
     }
@@ -133,7 +134,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         self.view.layer.insertSublayer(gradient,at:0)
         
         dateLabel.textColor = .systemGray6
-        locationText.textColor = .systemGray6
         locationLabel.textColor = .systemGray6
         temperatureLabel.textColor = .systemGray6
         conditionLabel.textColor = .systemGray6
@@ -142,7 +142,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //MARK: -Get info & set value
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
-        print(location)
         lat = location.coordinate.latitude
         lon = location.coordinate.longitude
         
@@ -152,6 +151,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 let jsonResponse = JSON(responseStr!)
                 let jsonWeather = jsonResponse["weather"].array![0]
                 let jsonTemp = jsonResponse["main"]
+                let wind = jsonResponse["wind"]
                 let iconName = jsonWeather["icon"].stringValue
 
                 switch iconName {
@@ -171,7 +171,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     self.imageView.image = UIImage(systemName: "cloud")
                     self.dayColorGradient()
                 case "03n":
-                    self.imageView.image = UIImage(systemName: "cloud.fill")
+                    self.imageView.image = UIImage(systemName: "cloud.moon.fill")
                     self.nightColorGradient()
                 case "04d":
                     self.imageView.image = UIImage(systemName: "smoke")
@@ -179,29 +179,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 case "04n":
                     self.imageView.image = UIImage(systemName: "smoke.fill")
                     self.nightColorGradient()
-                case "05d":
-                    self.imageView.image = UIImage(systemName: "smoke")
-                    self.dayColorGradient()
-                case "05n":
-                    self.imageView.image = UIImage(systemName: "smoke.fill")
-                    self.nightColorGradient()
                 case "09d":
-                    self.imageView.image = UIImage(systemName: "cloud.rain")
+                    self.imageView.image = UIImage(systemName: "cloud.drizzle")
                     self.dayColorGradient()
                 case "09n":
-                    self.imageView.image = UIImage(systemName: "cloud.rain.fill")
+                    self.imageView.image = UIImage(systemName: "cloud.drizzle.fill")
                     self.nightColorGradient()
                 case "10d":
-                    self.imageView.image = UIImage(systemName: "cloud.sun.rain")
+                    self.imageView.image = UIImage(systemName: "cloud.heavyrain")
                     self.dayColorGradient()
                 case "10n":
-                    self.imageView.image = UIImage(systemName: "cloud.moon.rain")
+                    self.imageView.image = UIImage(systemName: "cloud.heavyrain.fill")
                     self.nightColorGradient()
                 case "11d":
-                    self.imageView.image = UIImage(systemName: "cloud.bolt.rain")
+                    self.imageView.image = UIImage(systemName: "cloud.bolt")
                     self.dayColorGradient()
                 case "11n":
-                    self.imageView.image = UIImage(systemName: "cloud.moon.rain")
+                    self.imageView.image = UIImage(systemName: "cloud.bolt.fill")
                     self.nightColorGradient()
                 case "13d":
                     self.imageView.image = UIImage(systemName: "snowflake")
@@ -210,19 +204,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     self.imageView.image = UIImage(systemName: "snowflake")
                     self.nightColorGradient()
                 case "50d":
-                    self.imageView.image = UIImage(systemName: "tornado")
+                    self.imageView.image = UIImage(systemName: "cloud.fog")
                     self.dayColorGradient()
                 case "50n":
-                    self.imageView.image = UIImage(systemName: "tornado")
+                    self.imageView.image = UIImage(systemName: "cloud.fog.fill")
                     self.nightColorGradient()
                 default:
                     self.imageView.image = UIImage(systemName: "exclamationmark.circle")
                     self.conditionLabel.text = "天気: その他(天気に警戒してください。）"
                     self.view.backgroundColor = .blue
                 }
-                self.locationLabel.text = jsonResponse["name"].stringValue
-                self.conditionLabel.text = jsonWeather["description"].stringValue
-                self.temperatureLabel.text = "温度: \(Int(round(jsonTemp["temp"].doubleValue))) ℃"
+                self.locationLabel.text = "現在地:  \(jsonResponse["name"].stringValue)"
+                self.conditionLabel.text = "天気:  \(jsonWeather["description"].stringValue)"
+                self.windSpeedLabel.text = "風速:  \(wind["speed"].stringValue) / sec"
+                self.temperatureLabel.text = "温度:  \(Int(round(jsonTemp["temp"].doubleValue)))度"
+                self.humidityLabel.text = "湿度:  \(jsonTemp["humidity"].stringValue) %"
             }
         }
     }
