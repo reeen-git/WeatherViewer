@@ -123,22 +123,31 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let gradientColors: [CGColor] = [topColor, bottopColor]
         gradient.colors = gradientColors
         self.view.layer.insertSublayer(gradient,at:0)
+        
+        
+        dateLabel.textColor = .darkGray
+        locationLabel.textColor = .darkGray
+        temperatureLabel.textColor = .darkGray
+        conditionLabel.textColor = .darkGray
+        humidityLabel.textColor = .darkGray
+        windSpeedLabel.textColor = .darkGray
     }
     
     func nightColorGradient() {
         gradient.frame = view.bounds
-        let topColor = UIColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)).cgColor
-        let bottopColor = UIColor(#colorLiteral(red: 0.4114098549, green: 0.4468902946, blue: 0.4945960641, alpha: 1)).cgColor
+        let topColor = UIColor(#colorLiteral(red: 0.006315069739, green: 0.02612021565, blue: 0.1320874691, alpha: 1)).cgColor
+        let bottopColor = UIColor(#colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)).cgColor
         let gradientColors: [CGColor] = [topColor, bottopColor]
         gradient.colors = gradientColors
         self.view.layer.insertSublayer(gradient,at:0)
         
-        dateLabel.textColor = .systemGray6
-        locationLabel.textColor = .systemGray6
-        temperatureLabel.textColor = .systemGray6
-        conditionLabel.textColor = .systemGray6
-        humidityLabel.textColor = .systemGray6
-        windSpeedLabel.textColor = .systemGray6
+        dateLabel.textColor = .yellow
+        locationLabel.textColor = .yellow
+        temperatureLabel.textColor = .yellow
+        conditionLabel.textColor = .yellow
+        humidityLabel.textColor = .yellow
+        windSpeedLabel.textColor = .yellow
+        
     }
     
 //MARK: -Get info & set value
