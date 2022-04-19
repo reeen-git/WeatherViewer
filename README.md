@@ -10,7 +10,7 @@ CoreDataを用いてユーザーの現在地を取得し、その場所の天気
 UiKit / Alamofire / SwiftyJSON / NVActivityIndicatorView / CoreLocation
 
 --アプリ画像--  
-＜昼使用時＞
+＜昼使用時＞　              ＜夜使用時＞
   
 <img src="https://user-images.githubusercontent.com/94460967/164005616-d288dd83-ecb2-4f6e-ad6d-be2981642f3a.png" width="320px">![]<img src="https://user-images.githubusercontent.com/94460967/164005651-bdc071fb-3e14-4329-a1c6-efb867c0a06e.png" width="320px">
 
