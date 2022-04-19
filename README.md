@@ -11,6 +11,6 @@ UiKit / Alamofire / SwiftyJSON / NVActivityIndicatorView / CoreLocation
 
 --アプリ画像--  
   
-<朝/昼使用時イメージ><img src="https://user-images.githubusercontent.com/94460967/164005616-d288dd83-ecb2-4f6e-ad6d-be2981642f3a.png" width="320px">＜夕方・夜使用時イメージ＞<img src="https://user-images.githubusercontent.com/94460967/164005651-bdc071fb-3e14-4329-a1c6-efb867c0a06e.png" width="320px">
+<朝/昼使用時イメージ><img src="https://user-images.githubusercontent.com/94460967/164005616-d288dd83-ecb2-4f6e-ad6d-be2981642f3a.png" width="240px">＜夕方・夜使用時イメージ＞<img src="https://user-images.githubusercontent.com/94460967/164005651-bdc071fb-3e14-4329-a1c6-efb867c0a06e.png" width="240px">
 
 
