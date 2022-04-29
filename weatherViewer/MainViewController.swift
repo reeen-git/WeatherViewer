@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class MainViewController: UIViewController, CLLocationManagerDelegate {
 
     //MARK: -Setting Views
     let dateLabel: UILabel = {
@@ -70,8 +70,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     // user location
     let locationManager = CLLocationManager()
     let gradient = CAGradientLayer()
-    var lat = 26.8205
-    var lon = 30.8024
+    var lat = 0.0
+    var lon = 0.0
     
 //MARK: -ViewDidLoad
     override func viewDidLoad() {
@@ -153,8 +153,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //MARK: -Get info & set value
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
-        lat = location.coordinate.latitude
-        lon = location.coordinate.longitude
+        lat = Double(location.coordinate.latitude)
+        lon = Double(location.coordinate.longitude)
         
         AF.request("https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&lang=ja&appid=e314c7e4533ae54e9740790e14b56ac3&units=metric").response { response in
             if let responseStr = response.value {
@@ -220,6 +220,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 case "50n":
                     self.imageView.image = UIImage(systemName: "cloud.fog.fill")
                     self.nightColorGradient()
+            //ここには到達しない
                 default:
                     self.imageView.image = UIImage(systemName: "exclamationmark.circle")
                     self.conditionLabel.text = "天気: その他(天気に警戒してください。）"
